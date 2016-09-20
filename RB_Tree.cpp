@@ -197,7 +197,7 @@ rb_node* RB::DeleteNode(int data)
 	{
 		position->data = y->data;
 	}
-	if (y->color = rb_black)
+	if (y->color == rb_black)
 		DeleteFixUp(x);
 	return y;
 }
