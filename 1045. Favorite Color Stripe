@@ -58,3 +58,40 @@ int main()
     fcs.get_data();
     fcs.compute();
 }
+/////////////////////////////////////////////////*
+第二种方法
+#include <iostream>
+using namespace std;
+const int maxc = 202;
+const int maxs = 10002;
+int order[maxc], stripe[maxs], dp[maxs][maxs];
+int main()
+{
+    int N;
+    int M;
+    int L;
+    cin >> N;
+    cin >> M;
+    for(int i = 1; i <= M; ++i)
+        cin >> order[i];
+    cin >> L;
+    for(int i = 1; i <= L; ++i)
+        cin >> stripe[i];
+    for(int i = 0; i <= M; ++i)
+    {
+        for(int j = 0; j <= L; ++j)
+        {
+            if(i == 0 || j == 0)
+                dp[i][j] = 0;
+            else
+            {
+                int MAX = max(dp[i-1][j], dp[i][j-1]);
+                if(order[i] == stripe[j])
+                    dp[i][j] = MAX + 1;
+                else
+                    dp[i][j] = MAX;
+            }
+        }
+    }
+    cout << dp[M][L];
+}*/
