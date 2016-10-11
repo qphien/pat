@@ -1,0 +1,60 @@
+#include <iostream>
+
+using namespace std;
+
+class FavoriteColorStripe
+{
+private:
+    int N;
+    int M;
+    int L;
+    int num = 0;
+    int order[201] = {0};
+    int stripe[10001];
+public:
+    void get_data();
+    void compute();
+};
+void FavoriteColorStripe::get_data()
+{
+    cin >> N >> M;
+    int temp;
+    for(int i = 0; i != M; ++i)
+    {
+        cin >> temp;
+        order[temp] = i + 1;
+    }
+    cin >> L;
+    for(int i = 0;i != L; ++i)
+    {
+        cin >> temp;
+        if(order[temp] != 0)
+        {
+            stripe[num] = order[temp];
+            ++num;
+        }
+    }
+}
+void FavoriteColorStripe::compute()
+{
+    int len[10001];
+    int result = 0;
+    for(int i = 0; i != num; ++i)
+    {
+        len[i] = 1;
+        for(int j = 0; j != i; ++j)
+        {
+            if(stripe[i] >= stripe[j])
+                len[i] = len[j] + 1;
+        }
+        if(len[i] > result)
+            result = len[i];
+    }
+    cout << result;
+}
+int main()
+{
+    FavoriteColorStripe fcs;
+    fcs.get_data();
+    fcs.compute();
+}
